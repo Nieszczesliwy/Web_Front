@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Мій сайт</title>
+</head>
+<style>
+    #turnInfo {
+        margin: 0 60rem;
+    }
+
+    #blackScore,
+    #whiteScore {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        margin-left: 12rem;
+    }
+
+    #blackScore {
+        color: #dcdcdc;
+    }
+
+    #whiteScore {
+        color: #dcdcdc;
+    }
+</style>
+
+<body onload="setup();">
+    <nav>
+        <div class="nav-logo">
+            <a href="#">
+                <img src="images/logo.png" alt="Логотип">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="#">Головна</a></li>
+            <li id="link1" class="link"><a href="#">Статті</a></li>
+            <li id="link2" class="link"><a href="#">Категорії</a></li>
+            <li id="link3" class="link"><a href="test_web.html">Тест</a></li>
+            <li id="link4" class="link"><a href="survey.html">Опитування</a></li>
+        </ul>
+
+        <button class="btn">Дізнатись більше</button>
+        <a href="javascript:void(0);" class="hamburger-menu">
+            <i class="fa fa-bars"></i>
+        </a>
+        <div class="overlay"></div>
+
+
+    </nav>
+    <p id="blackScore">Black Score: 0</p>
+    <p id="whiteScore">White Score: 0</p>
+    <p id="turnInfo">Player's turn: <b>White</b></p>
+    <div class="board-container">
+
+        <section id="board">
+            <div class="overlay" id="promotionMessage">
+                <div class="overlay-inner">
+                    <span class="overlay-title">Promotion!</span>
+                    <p class="overlay-text" id="alertText"></p>
+                    <ul id="promotionList" class="white">
+                        <li><a href="#" class="promotion-button queen" onclick="promote('queen');"></a></li>
+                        <li><a href="#" class="promotion-button castle" onclick="promote('castle');"></a></li>
+                        <li><a href="#" class="promotion-button bishop" onclick="promote('bishop');"></a></li>
+                        <li><a href="#" class="promotion-button knight" onclick="promote('knight');"></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="overlay" id="errorMessage">
+                <div class="overlay-inner">
+                    <span class="overlay-title">Error!</span>
+                    <p class="overlay-text" id="errorText"></p>
+                    <a href="#" class="overlay-button" onclick="closeError();">Close</a>
+                </div>
+            </div>
+            <div class="overlay" id="endMessage">
+                <div class="overlay-inner">
+                    <span class="overlay-title">Game Over!</span>
+                    <p class="overlay-text" id="endText"></p>
+                    <a href="#" class="overlay-button" onclick="newGame();">New Game</a>
+                </div>
+            </div>
+        </section>
+        <script type="text/javascript" src="js/game.js"></script>
+    </div>
+
+    <footer class="container">
+        <div class="column">
+            <p>вул.Драгоманова 50, Львів, Україна</p>
+            <div class="socials">
+                <a href="#"><i class="ri-facebook-fill"></i></a>
+                <a href="#"><i class="ri-instagram-line"></i></a>
+                <a href="#"><i class="ri-twitter-line"></i></a>
+            </div>
+        </div>
+        <div class="column">
+            <a href="#">Про нас</a>
+            <a href="#">Контакти</a>
+        </div>
+        <div class="column">
+            <a href="#">Блог</a>
+            <a href="#">FAQ</a>
+        </div>
+        <div class="column">
+            <a href="#">Допомога</a>
+            <a href="#">Політика конфіденційності</a>
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>
