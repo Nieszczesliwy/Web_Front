@@ -12,7 +12,6 @@
 </head>
 
 <style>
-    /* Styles for questions */
     .question {
         background-color: #1c1a1a;
         padding: 20px;
@@ -22,7 +21,6 @@
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     }
     
-    /* Styles for answer list */
     .answers li {
         margin-bottom: 10px;
         padding: 10px;
@@ -33,7 +31,6 @@
         align-items: center;
     }
     
-    /* Styles for radio buttons */
     .answers li input[type="radio"] {
         margin-right: 40px;
     }
@@ -67,8 +64,13 @@
     .incorrect {
         color: red;
     }
+
+    .svg-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     </style>
-    
 
 <body>
     <nav>
@@ -93,10 +95,52 @@
         <div class="overlay"></div>
     </nav>
 
-
+    <div class="svg-container">
+        <svg width="200px" height="250px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <lineargradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:rgb(0, 38, 255);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+                </lineargradient>
+                <filter id="dropshadow" height="130%">
+                    <fegaussianblur in="SourceAlpha" stddeviation="3"/> 
+                    <feoffset dx="2" dy="2" result="offsetblur"/> 
+                    <fecomponenttransfer>
+                        <fefunca type="linear" slope="0.5"/>
+                    </fecomponenttransfer>
+                    <femerge> 
+                        <femergenode/> 
+                        <femergenode in="SourceGraphic"/> 
+                    </femerge>
+                </filter>
+            </defs>
+            <path d="M50,10
+               Q25,50 50,90 
+               Q75,50 50,10 
+               M50,10 
+               L50,90 
+               Q75,130 100,90 
+               L100,10 
+               Q75,50 100,10 
+               Q125,50 100,90 
+               Q125,130 150,90 
+               L150,10 
+               Q125,50, 150,10
+               Q175,50 150,90 
+               M150,90
+               Q175,130 150,160
+               Q125,190 100,160
+               Q75,190 50,160
+               Q25,130 50,90" fill="none" stroke="url(#gradient)" stroke-width="2" filter="url(#dropshadow)" />
+            <rect x="25" y="25" width="150" height="20" fill="url(#gradient)" filter="url(#dropshadow)" />
+            <text x="85" y="40" font-family="Arial" font-size="14" fill="white">2003</text>
+            <text x="58" y="140" font-family="Arial" font-size="14" fill="white">ELECTRONICS</text>
+        </svg>
+    </div>
     <div id="test"></div>
     <button id="submit">Перевірити відповіді</button>
     <div id="result"></div>
+
 
     <footer class="container">
         <div class="column">
