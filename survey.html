@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
+
+<style>
+.filter-buttons {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+}
+
+.filter-buttons button {
+    margin: 10px;
+    padding: 10px;
+    background-color: #4fd1c5;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-buttons button:hover {
+    background-color: #328880;
+}
+
+.results-display-area {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; 
+    align-items: center; 
+}
+</style>
+
 <body>
     <nav>
         <div class="nav-logo">
@@ -23,6 +53,7 @@
             <li id="link2" class="link"><a href="#">Категорії</a></li>
             <li id="link3" class="link"><a href="test_web.html">Тест</a></li>
             <li id="link4" class="link"><a href="survey.html">Опитування</a></li>
+            <li id="link5" class="link"><a href="game.html">Шахи</a></li>
         </ul>
 
         <button class="btn">Дізнатись більше</button>
@@ -31,54 +62,63 @@
         </a>
         <div class="overlay"></div>
     </nav>
-    <form id="surveyForm">        
+    <form id="surveyForm">
         <label for="faculty">На якому факультеті ви навчаєтесь:</label>
         <select id="faculty" name="faculty">
             <option value="faculty1">Факультет 1</option>
             <option value="faculty2">Факультет 2</option>
         </select>
-    
+
         <p>Виберіть потік на якому ви навчаєтесь:</p>
         <input type="radio" id="stream1" name="stream" value="stream1">
         <label for="stream1">Потік 1</label>
         <input type="radio" id="stream2" name="stream" value="stream2">
         <label for="stream2">Потік 2</label>
-    
+
         <p>Вкажіть групу:</p>
         <input type="checkbox" id="group1" name="group1" value="Group1">
         <label for="group1">Група 1</label>
         <input type="checkbox" id="group2" name="group2" value="Group2">
         <label for="group2">Група 2</label>
-    
+
         <label for="interviewDate">Виберіть зручний день для проходження співбесіди:</label>
         <input type="date" id="interviewDate" name="interviewDate">
-    
+
         <label for="interviewTime">Виберіть зручний час для проходження співбесіди:</label>
         <input type="time" id="interviewTime" name="interviewTime">
-    
+
         <label for="interviewWeek">Виберіть зручний тиждень для проходження співбесіди:</label>
         <input type="week" id="interviewWeek" name="interviewWeek">
-    
+
         <label for="averageScore">Вкажіть середній бал:</label>
         <input type="number" id="averageScore" name="averageScore">
-        
+
         <label for="satisfaction">Як ви оцінюєте своє задоволення курсом?</label>
         <input type="range" id="satisfaction" name="satisfaction" min="0" max="10">
-        
+
         <label for="favoriteSubject">Улюблений предмет:</label>
         <input type="text" id="favoriteSubject" name="favoriteSubject">
-        
+
         <label for="needImprovement">Що потребує покращення? (зазначте одне):</label>
         <input type="search" id="needImprovement" name="needImprovement">
-        
+
         <label for="email">Ваша електронна пошта:</label>
         <input type="email" id="email" name="email">
-        
+
         <label for="birthday">Дата вашого народження:</label>
         <input type="date" id="birthday" name="birthday">
-    
+
         <input type="submit" value="Submit">
     </form>
+
+    <div class="filter-buttons">
+        <button onclick="displayResultsByFaculty('faculty1')">Факультет 1</button>
+        <button onclick="displayResultsByDateTime('2023-01-01', '10:00')">1 Січня 10:00</button>
+        <button onclick="displayResultsByScore(3, 4)">Середній Бал 3-4</button>
+    </div>
+    
+    <div id="displayArea" class="results-display-area"></div>
+
 
     <footer class="container">
         <div class="column">
@@ -104,11 +144,11 @@
     </footer>
 
     <script>
-        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+        document.getElementById('surveyForm').addEventListener('submit', function (event) {
             event.preventDefault();
             var formData = new FormData(this);
             var formObject = {};
-            formData.forEach(function(value, key){
+            formData.forEach(function (value, key) {
                 formObject[key] = value;
             });
             var currentResults = JSON.parse(localStorage.getItem('surveyResults')) || [];
@@ -120,26 +160,68 @@
         function filterByFaculty(faculty) {
             var results = JSON.parse(localStorage.getItem('surveyResults')) || [];
             var filteredResults = results.filter(result => result.faculty === faculty);
-            console.log(filteredResults); 
+            console.log(filteredResults);
         }
         filterByFaculty('faculty1');
-        
+
         function filterByDateTime(date, time) {
             var results = JSON.parse(localStorage.getItem('surveyResults')) || [];
             var filteredResults = results.filter(result => result.interviewDate === date && result.interviewTime === time);
-            console.log(filteredResults); 
+            console.log(filteredResults);
         }
         filterByDateTime('2023-01-01', '10:00');
 
         function filterByScore(minScore, maxScore) {
             var results = JSON.parse(localStorage.getItem('surveyResults')) || [];
             var filteredResults = results.filter(result => result.averageScore >= minScore && result.averageScore <= maxScore);
-            console.log(filteredResults); 
+            console.log(filteredResults);
         }
-        filterByScore(3, 4); 
+        filterByScore(3, 4);
+
+        function displayResultsByFaculty(faculty) {
+            var results = JSON.parse(localStorage.getItem('surveyResults')) || [];
+            var filteredResults = results.filter(result => result.faculty === faculty);
+
+            var displayArea = document.getElementById('displayArea');
+            displayArea.innerHTML = '';
+            filteredResults.forEach(function (result) {
+                var p = document.createElement('p');
+                p.textContent = `Учасник: ${result.email}, Факультет: ${result.faculty}`;
+                displayArea.appendChild(p);
+            });
+        }
+
+        function displayResultsByDateTime(date, time) {
+            var results = JSON.parse(localStorage.getItem('surveyResults')) || [];
+            var filteredResults = results.filter(result => result.interviewDate === date && result.interviewTime === time);
+
+            var displayArea = document.getElementById('displayArea');
+            displayArea.innerHTML = '';
+
+            filteredResults.forEach(function (result) {
+                var p = document.createElement('p');
+                p.textContent = `Учасник: ${result.email}, Дата: ${result.interviewDate}, Час: ${result.interviewTime}`;
+                displayArea.appendChild(p);
+            });
+        }
+
+        function displayResultsByScore(minScore, maxScore) {
+            var results = JSON.parse(localStorage.getItem('surveyResults')) || [];
+            var filteredResults = results.filter(result => parseFloat(result.averageScore) >= minScore && parseFloat(result.averageScore) <= maxScore);
+
+            var displayArea = document.getElementById('displayArea');
+            displayArea.innerHTML = '';
+
+            filteredResults.forEach(function (result) {
+                var p = document.createElement('p');
+                p.textContent = `Учасник: ${result.email}, Середній бал: ${result.averageScore}`;
+                displayArea.appendChild(p);
+            });
+        }
 
 
     </script>
 
 </body>
+
 </html>
